@@ -4,11 +4,9 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BaseLayoutComponent } from "./base-layout/base-layout.component";
-import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./auth/login/login.component";
 
 @NgModule({
-  declarations: [AppComponent, BaseLayoutComponent, HomeComponent],
+  declarations: [AppComponent, BaseLayoutComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
