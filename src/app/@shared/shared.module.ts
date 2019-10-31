@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BaseLayoutComponent } from "./layouts/base-layout/base-layout.component";
 import { RouterModule } from "@angular/router";
-import { OpenService } from "../open.service";
+import { OpenService } from "../@core/open.service";
 
 const COMPONENTS = [BaseLayoutComponent];
 const MODULES = [CommonModule];
