@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { OpenService } from "@core/open.service";
+import { OpenService } from "@core/services/open.service";
 
 @Component({
   selector: "app-login",
