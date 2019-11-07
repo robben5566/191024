@@ -17,4 +17,10 @@ export class OpenService {
   add() {
     this.count++;
   }
+
+  uv() {
+    const url =
+      "http://opendata.epa.gov.tw/webapi/Data/UV/?$orderby=PublishTime%20desc&$skip=0&$top=1000&format=json";
+    return this.http.jsonp(url, "callback");
+  }
 }
