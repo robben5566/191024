@@ -11,11 +11,7 @@ export class HomeComponent implements OnInit {
   categories$ = this.openService.categories();
   uv$ = this.openService.uv();
 
-  ngOnInit() {
-    this.openService.uv().subscribe(data => {
-      console.log(data);
-    });
-  }
+  ngOnInit() {}
   get count() {
     return this.openService.count;
   }

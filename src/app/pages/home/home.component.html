@@ -2,4 +2,16 @@
 <!-- <h2>{{ count }}</h2>
 <button type="button" (click)="add()">add</button>
 <pre>{{ categories$ | async | json }}</pre> -->
-<pre>{{ uv$ | async | json }}</pre>
+<!-- <pre>{{ uv$ | async | json }}</pre> -->
+
+<table>
+  <tr *ngFor="let item of uv$ | async">
+    <td>{{ item.county }}</td>
+    <td>{{ item.siteName }}</td>
+    <td>{{ item.lat }} | {{ item.dd_lat }}</td>
+    <td>{{ item.lon }} | {{ item.dd_lon }}</td>
+    <button (click)="item.openGoogleMap()">go</button>
+  </tr>
+</table>
+
+<!-- <pre>{{ newuv$ | json }}</pre> -->

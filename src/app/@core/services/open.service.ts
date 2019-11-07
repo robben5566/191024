@@ -1,6 +1,8 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 import { CONFIG, Config } from "@core/core.options";
+import { UVModel } from "@core/models/uv";
 
 @Injectable()
 export class OpenService {
@@ -21,6 +23,8 @@ export class OpenService {
   uv() {
     const url =
       "http://opendata.epa.gov.tw/webapi/Data/UV/?$orderby=PublishTime%20desc&$skip=0&$top=1000&format=json";
-    return this.http.jsonp(url, "callback");
+    return this.http
+      .jsonp<any>(url, "callback")
+      .pipe(map(list => list.map(item => new UVModel(item))));
   }
 }
