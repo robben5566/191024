@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { OpenService } from "@core/services/open.service";
-import { AUTH_CONFIG } from "@auth/auth.option";
+import { AUTH_CONFIG, DefaultConfig } from "@auth/auth.option";
+import { AuthService } from "@auth/auth.service";
 
 @Component({
   selector: "app-login",
@@ -10,21 +11,29 @@ import { AUTH_CONFIG } from "@auth/auth.option";
 })
 export class LoginComponent implements OnInit {
   loginForm = this.formBuilder.group({
-    username: ["", [Validators.required, Validators.minLength(3)]],
-    password: ["", Validators.required]
+    username: ["", this.usernameVaildatorFns()],
+    password: ["", this.passwordVaildatorFns()]
   });
 
   constructor(
     private openService: OpenService,
     private formBuilder: FormBuilder,
-    @Inject(AUTH_CONFIG) private config: string
+    private authService: AuthService,
+    @Inject(AUTH_CONFIG) private config: DefaultConfig
   ) {}
 
   ngOnInit() {
-    console.log("auth_config", this.config);
+    console.log("auth_config", this.config.form);
   }
   categories$ = this.openService.categories();
 
+  usernameVaildatorFns() {
+    return [Validators.required, Validators.minLength(3)];
+  }
+
+  passwordVaildatorFns() {
+    return [Validators.required];
+  }
   get count() {
     return this.openService.count;
   }
@@ -34,5 +43,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.status);
+    this.authService.login(this.loginForm.value).subscribe(response => {
+      console.log(response);
+    });
   }
 }
