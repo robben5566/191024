@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { OpenService } from "@core/services/open.service";
 
 @Component({
@@ -7,7 +8,15 @@ import { OpenService } from "@core/services/open.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  constructor(private openService: OpenService) {}
+  loginForm = this.formBuilder.group({
+    username: ["", [Validators.required, Validators.minLength(3)]],
+    password: ["", Validators.required]
+  });
+
+  constructor(
+    private openService: OpenService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {}
   categories$ = this.openService.categories();
@@ -17,5 +26,9 @@ export class LoginComponent implements OnInit {
   }
   add() {
     this.openService.add();
+  }
+
+  onSubmit() {
+    console.log(this.loginForm.status);
   }
 }
