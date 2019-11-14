@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, InjectionToken } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { AuthRoutingModule } from "./auth-routing.module";
@@ -6,9 +6,17 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { SharedModule } from "@shared/shared.module";
-
+import { ModuleWithProviders } from "@angular/compiler/src/core";
+import { AUTH_CONFIG } from "@auth/auth.option";
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ForgotPasswordComponent],
   imports: [AuthRoutingModule, SharedModule]
 })
-export class AuthModule {}
+export class AuthModule {
+  static forRoot(option?: any): ModuleWithProviders {
+    return {
+      ngModule: AuthModule,
+      providers: [{ provide: AUTH_CONFIG, useValue: "ooxx" }]
+    };
+  }
+}

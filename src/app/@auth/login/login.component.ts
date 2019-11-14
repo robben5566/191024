@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { OpenService } from "@core/services/open.service";
+import { AUTH_CONFIG } from "@auth/auth.option";
 
 @Component({
   selector: "app-login",
@@ -15,10 +16,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private openService: OpenService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    @Inject(AUTH_CONFIG) private config: string
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("auth_config", this.config);
+  }
   categories$ = this.openService.categories();
 
   get count() {
