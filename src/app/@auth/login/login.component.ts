@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { OpenService } from "@core/services/open.service";
 import { AUTH_CONFIG, DefaultConfig } from "@auth/auth.option";
 import { AuthService } from "@auth/auth.service";
-
+import { get } from "lodash";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -11,8 +11,8 @@ import { AuthService } from "@auth/auth.service";
 })
 export class LoginComponent implements OnInit {
   loginForm = this.formBuilder.group({
-    username: ["", this.usernameVaildatorFns()],
-    password: ["", this.passwordVaildatorFns()]
+    username: ["", this.getValidators("username")],
+    password: ["", this.getValidators("password")]
   });
 
   constructor(
@@ -28,11 +28,31 @@ export class LoginComponent implements OnInit {
   categories$ = this.openService.categories();
 
   usernameVaildatorFns() {
-    return [Validators.required, Validators.minLength(3)];
+    // const fns = [];
+    // if (this.config.form.login.username.required) {
+    //   fns.push(Validators.required);
+    // }
+    // if (this.config.form.login.username.minLength) {
+    //   fns.push(Validators.minLength(this.config.form.login.username.minLength));
+    // }
+    // return fns;
   }
 
   passwordVaildatorFns() {
     return [Validators.required];
+  }
+
+  getValidators(field: string) {
+    const fns = [];
+    const required = get(this.config, `form.login.${field}.required`);
+    const minLength = get(this.config, `form.login.${field}.minLength`);
+    if (required) {
+      fns.push(Validators.required);
+    }
+    if (minLength) {
+      fns.push(Validators.minLength(this.config.form.login.username.minLength));
+    }
+    return fns;
   }
   get count() {
     return this.openService.count;
