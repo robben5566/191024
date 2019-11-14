@@ -19,5 +19,10 @@ export const DEFAULT_CONFIG = {
     }
   }
 };
+
 export type DefaultConfig = typeof DEFAULT_CONFIG;
-export const AUTH_CONFIG = new InjectionToken<DefaultConfig>("app config");
+
+export const AUTH_DEFAULT_CONFIG = new InjectionToken<DefaultConfig>(
+  "auth config-default"
+);
+export const AUTH_CONFIG = new InjectionToken<DefaultConfig>("auth config");
