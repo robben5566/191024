@@ -1,19 +1,18 @@
 import { NgModule, InjectionToken } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
+import { ModuleWithProviders } from "@angular/compiler/src/core";
 import { AuthRoutingModule } from "./auth-routing.module";
+import { SharedModule } from "@shared/shared.module";
+import { AuthService } from "./auth.service";
+
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
-import { SharedModule } from "@shared/shared.module";
-import { ModuleWithProviders } from "@angular/compiler/src/core";
 import {
   AUTH_CONFIG,
   DEFAULT_CONFIG,
   AUTH_DEFAULT_CONFIG,
   DefaultConfig
 } from "@auth/auth.option";
-import { AuthService } from "./auth.service";
 
 import { defaultDeep } from "lodash";
 export function authConfigFactory(defaultConfig: any) {

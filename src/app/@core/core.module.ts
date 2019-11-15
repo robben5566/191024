@@ -4,11 +4,11 @@ import {
   Optional,
   SkipSelf
 } from "@angular/core";
-import { OpenService } from "./services/open.service";
 import { environment } from "src/environments/environment";
+import { OpenService } from "./services/open.service";
 import { OpenMockService } from "./mock/open-mock.service";
 import { CONFIG, DefaultConfig } from "@core/core.options";
-//import { AuthModule } from "@auth/auth.module";
+
 const useMock = environment.useMock;
 console.log("useMock?", useMock);
 

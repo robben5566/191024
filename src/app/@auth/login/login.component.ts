@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { OpenService } from "@core/services/open.service";
-import { AUTH_CONFIG, DefaultConfig } from "@auth/auth.option";
 import { AuthService } from "@auth/auth.service";
+import { AUTH_CONFIG, DefaultConfig } from "@auth/auth.option";
 import { get } from "lodash";
 @Component({
   selector: "app-login",
