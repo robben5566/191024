@@ -25,22 +25,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log("auth_config", this.config.form);
   }
-  categories$ = this.openService.categories();
-
-  usernameVaildatorFns() {
-    // const fns = [];
-    // if (this.config.form.login.username.required) {
-    //   fns.push(Validators.required);
-    // }
-    // if (this.config.form.login.username.minLength) {
-    //   fns.push(Validators.minLength(this.config.form.login.username.minLength));
-    // }
-    // return fns;
-  }
-
-  passwordVaildatorFns() {
-    return [Validators.required];
-  }
 
   getValidators(field: string) {
     const fns = [];
@@ -62,9 +46,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.status);
-    this.authService.login(this.loginForm.value).subscribe(response => {
-      console.log(response);
-    });
+    //console.log(this.loginForm.status);
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(response => {
+        console.log(response);
+        if (response.isSuccess) {
+          setTimeout(() => {
+            location.href = this.config.form.login.redirect.url;
+            console.log(this.config);
+          }, this.config.form.login.redirect.delay);
+        }
+      });
+    }
   }
 }

@@ -14,11 +14,10 @@ import {
   DefaultConfig
 } from "@auth/auth.option";
 
-import { defaultDeep } from "lodash";
-export function authConfigFactory(defaultConfig: any) {
-  console.log("...", defaultConfig);
-
-  return defaultConfig;
+import { defaultsDeep } from "lodash";
+export function authConfigFactory(option: any) {
+  const authConfig = defaultsDeep(option, DEFAULT_CONFIG);
+  return authConfig;
 }
 
 @NgModule({
